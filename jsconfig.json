@@ -1,0 +1,11 @@
+{
+    "compilerOptions" : {
+        "baseUrl": "api",
+        "paths": {
+            "models": ["models/*"],
+            "config": ["config/*"],
+            "controllers": ["v1/controllers/*"],
+            
+        }
+    }
+}
