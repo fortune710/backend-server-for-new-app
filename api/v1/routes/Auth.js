@@ -1,0 +1,25 @@
+const express = require('express');
+const { body } = require('express-validator');
+const AuthRouter = express.Router();
+
+const { AddUser } = require('../controllers/User/AddUser');
+const { GetUser } = require('../controllers/User/GetUser');
+const { UpdateUser } = require('../controllers/User/UpdateUser');
+
+AuthRouter.get('/sign-in',[
+    body('email').isEmail(),
+    body('password').isLength({ min: 5 })
+], (req, res) => GetUser(req, res))
+
+AuthRouter.post('/sign-up', [
+    body('email').isEmail(),
+    body('password').isLength({ min: 5 })
+], (req, res) => AddUser(req, res))
+
+AuthRouter.put('/update-profile', [
+    body('id').trim()
+], (req, res) => UpdateUser(req, res))
+
+module.exports = {
+    AuthRouter: AuthRouter
+}
