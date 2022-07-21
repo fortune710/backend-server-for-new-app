@@ -8,10 +8,25 @@ class Post {
             this.parent_id = parent_id;
             this.status = status;
             this.type = type;
-            this.responses = responses;
             this.media = media;
+            this.responses = [];
             this.timestamp = new Date()
         }
+
+    getData(){
+        return {
+            post_id: this.post_id,
+            user_id: this.user_id,
+            user_id: this.post_content,
+            mosque_id: this.mosque_id,
+            parent_id: this.parent_id,
+            status: this.status,
+            type: this.type,
+            responses: this.responses,
+            media: this.media,
+            timestamp: this.timestamp 
+        }
+    }
    
 }
 

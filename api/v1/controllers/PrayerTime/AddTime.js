@@ -1,4 +1,4 @@
-const { PrayerTime } = require('models/PrayerTime');
+const { PrayerTime } = require('../../../models/PrayerTime');
 
 const AddTime = async(req, res) => {
     const { prayer_id, mosque_id, call_time, start_time } = req.body;

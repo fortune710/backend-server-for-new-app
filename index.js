@@ -4,10 +4,10 @@ const bodyparser = require('body-parser').json()
 
 const { AuthRouter } = require('./api/v1/routes/Auth')
 const { FollowRouter } = require('./api/v1/routes/FollowMosque')
-const { MosqueRouter } = require('v1/routes/Mosque');
-const { AdminRouter } = require('v1/routes/MosqueAdmin');
-const { PostRouter } = require('v1/routes/Post');
-const { PrayerTimeRouter } = require('v1/routes/PrayerTime');
+const { MosqueRouter } = require('./api/v1/routes/Mosque');
+const { AdminRouter } = require('./api/v1/routes/MosqueAdmin');
+const { PostRouter } = require('./api/v1/routes/Post');
+const { PrayerTimeRouter } = require('./api/v1/routes/PrayerTime');
 
 const app = express()
 

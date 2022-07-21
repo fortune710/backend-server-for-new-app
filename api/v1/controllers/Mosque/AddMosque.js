@@ -1,4 +1,4 @@
-const { Mosque } = require('models/Mosque');
+const { Mosque } = require('../../../models/Mosque');
 const { makeid } = require('../../../../helpers/randomid');
 
 const AddMosque = async(req, res) => {

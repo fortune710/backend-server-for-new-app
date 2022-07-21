@@ -1,4 +1,4 @@
-const { Mosque } = require('models/Mosque');
+const { Mosque } = require('../../../models/Mosque');
 
 const GetMosque = async(req, res) => {
     if(req instanceof Request){

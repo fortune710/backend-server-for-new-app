@@ -1,5 +1,5 @@
-const { firebaseDatabase } = require('config/nosql.db')
-const { Post } = require('models/Post');
+const { firebaseDatabase } = require('../../../config/nosql.db')
+const { Post } = require('../../../models/Post');
 
 
 const FlagPost = (req, res) => {

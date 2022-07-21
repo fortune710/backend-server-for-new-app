@@ -1,4 +1,4 @@
-const { MosqueAdmins } = require('models/MosqueAdmin');
+const { MosqueAdmins } = require('../../../models/MosqueAdmin');
 
 const AddAdmin = async(req, res) => {
     const { user_id } = req.body;

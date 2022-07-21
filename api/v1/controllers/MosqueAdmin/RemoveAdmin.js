@@ -1,4 +1,4 @@
-const { MosqueAdmins } = require('models/MosqueAdmin');
+const { MosqueAdmins } = require('../../../models/MosqueAdmin');
 
 
 const RemoveAdmin = async(req, res) => {

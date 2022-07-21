@@ -1,4 +1,4 @@
-const { Followership } = require('models/Followership');
+const { Followership } = require('../../../models/Followership');
 const { Op } = require('sequelize');
 
 
