@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const { databaseConnection } = require('../config/db');
+const { sequelize } = require('../config/db');
 
 class Denomination extends Model {}
 
@@ -12,13 +12,13 @@ Denomination.init({
         type: DataTypes.STRING(50)
     }
 }, {
-    databaseConnection,
+    sequelize,
     tableName: 'denomination',
     modelName: 'denomination'
 })
 
 
-databaseConnection.sync()
+sequelize.sync()
 
 module.exports = {
     Denomination: Denomination

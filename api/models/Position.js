@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const { databaseConnection } = require('../config/db');
+const { sequelize } = require('../config/db');
 
 
 class Position extends Model {}
@@ -17,13 +17,13 @@ Position.init({
     
 
 },{
-    databaseConnection,
+    sequelize,
     tableName: 'position',
     modelName: 'Position'
 })
 
 
-databaseConnection.sync()
+sequelize.sync()
 
 module.exports = {
     Position: Position

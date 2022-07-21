@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const { databaseConnection } = require('../config/db');
+const { sequelize } = require('../config/db');
 
 
 class PrayerTime extends Model {}
@@ -25,13 +25,13 @@ PrayerTime.init({
    
 
 },{
-    databaseConnection,
+    sequelize,
     tableName: 'prayer-time',
     modelName: 'PrayerTime'
 })
 
 
-databaseConnection.sync()
+sequelize.sync()
 
 module.exports = {
     PrayerTime: PrayerTime

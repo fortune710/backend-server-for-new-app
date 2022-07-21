@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const { databaseConnection } = require('../config/db');
+const { sequelize } = require('../config/db');
 
 
 class MosqueAdmins extends Model {}
@@ -24,13 +24,13 @@ MosqueAdmins.init({
     
 
 },{
-    databaseConnection,
+    sequelize,
     tableName: 'mosque-admin',
     modelName: 'MosqueAdmin'
 })
 
 
-databaseConnection.sync()
+sequelize.sync()
 
 module.exports = {
     MosqueAdmins: MosqueAdmins

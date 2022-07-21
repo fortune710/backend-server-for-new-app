@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const { databaseConnection } = require('../config/db');
+const { sequelize } = require('../config/db');
 
 
 class Prayer extends Model {}
@@ -8,6 +8,7 @@ Prayer.init({
     prayer_id: {
         primaryKey: true,
         type: DataTypes.SMALLINT,
+        autoIncrement: true,
         allowNull: false,
     },
     title: {
@@ -17,13 +18,14 @@ Prayer.init({
    
 
 },{
-    databaseConnection,
+    sequelize,
     tableName: 'Prayer',
     modelName: 'Prayer'
 })
 
+//Create the different prayers
 
-databaseConnection.sync()
+sequelize.sync()
 
 module.exports = {
     Prayer: Prayer

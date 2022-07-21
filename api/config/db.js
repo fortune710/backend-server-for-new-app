@@ -6,7 +6,7 @@ const DB_CONFIG = {
     username: 'root',
     password: ''
 }
-const connection = new Sequelize(...DB_CONFIG,{
+const sequelize = new Sequelize('backend-server', 'root','' , {
     host:'localhost',
     dialect: 'mysql',
     logging: false
@@ -14,5 +14,5 @@ const connection = new Sequelize(...DB_CONFIG,{
 
 
 module.exports = {
-    databaseConnection: connection
+    sequelize: sequelize
 }

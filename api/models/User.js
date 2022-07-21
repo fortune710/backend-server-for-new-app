@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const { databaseConnection } = require('../config/db');
+const { sequelize } = require('../config/db');
 
 
 class User extends Model {}
@@ -25,20 +25,16 @@ User.init({
     type:{ //Admin, Custodian, or regular user
         type: DataTypes.SMALLINT,
     },
-    user_id: {
-        type: DataTypes.STRING(15),
-        allowNull: false,
-    },
     profile_pic:{ //Profile pucture is either a base64 string or a URL
         type: DataTypes.STRING,
     },
 },{
-    databaseConnection,
+    sequelize,
     tableName: 'user',
     modelName: 'User'
 })
 
-databaseConnection.sync()
+sequelize.sync()
 
 module.exports = {
     User: User
