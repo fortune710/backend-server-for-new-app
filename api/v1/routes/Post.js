@@ -5,12 +5,13 @@ const { AddPost } = require('../controllers/Post/AddPost');
 const { AddReply } = require('../controllers/Post/AddReply');
 const { FlagPost } = require('../controllers/Post/FlagPost');
 
+const uploadFile = require('../../config/cloudinary')
 
 router.put('/create', [
     body('user_id').trim(),
     body('mosque_id').trim(),
     body('content').trim(),
-], (req, res) => AddPost(req, res))
+], uploadFile.single('file'), (req, res) => AddPost(req, res))
 
 router.put('/flag', [
     body('post_id').notEmpty().trim(),
