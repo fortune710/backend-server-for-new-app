@@ -16,7 +16,6 @@ const app = express();
 app.use(bodyparser)
 app.use(cors({
     origin: 'http://localhost:3000',
-    preflightContinue: true
 }))
 app.get('/', (req, res) => {
     res.send("working")
