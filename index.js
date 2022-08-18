@@ -15,9 +15,11 @@ const app = express();
 
 app.use(bodyparser)
 app.use(cors({
-    origin: '*'
+    origin: '*',
+    preflightContinue: true
 }))
 app.get('/', (req, res) => {
+    res.send("working")
     axios.get(`http://api.aladhan.com/v1/gToH?date=${todayDate}`, {
         headers: {
             mode: 'cors'
