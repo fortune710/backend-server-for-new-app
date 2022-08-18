@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyparser = require('body-parser').json()
-
+const cors = require('cors');
+const axios = require('axios');
 
 const { AuthRouter } = require('./api/v1/routes/Auth')
 const { FollowRouter } = require('./api/v1/routes/FollowMosque')
@@ -9,12 +10,27 @@ const { AdminRouter } = require('./api/v1/routes/MosqueAdmin');
 const { PostRouter } = require('./api/v1/routes/Post');
 const { PrayerTimeRouter } = require('./api/v1/routes/PrayerTime');
 
-const app = express()
+const app = express();
 
 
 app.use(bodyparser)
+app.use(cors({
+    origin: '*'
+}))
 app.get('/', (req, res) => {
-    res.send("Working")
+    axios.get(`http://api.aladhan.com/v1/gToH?date=${todayDate}`, {
+        headers: {
+            mode: 'cors'
+        }
+    })
+    .then(({ data }) => {
+        const { hijri } = data.data;
+        res.json({ hijri_date: hijri.date })
+    
+    })
+    .catch(() => {
+        res.json({ response: 'Errror while getting date' })
+    })
 })
 
 app.use('/auth', AuthRouter)
