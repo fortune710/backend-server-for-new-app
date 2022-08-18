@@ -4,6 +4,17 @@ const { body } = require('express-validator')
 const { AddTime } = require('../controllers/PrayerTime/AddTime');
 const { UpdateTime } = require('../controllers/PrayerTime/UpdateTime');
 
+const cors = require('cors');
+const corsOpts = {
+    origin: '*',
+    methods: [],
+    allowedHeaders: [],
+    exposedHeaders: [],
+    credentials: true
+}
+
+router.all('/add', cors(corsOpts))
+
 router.put('/add', [
     body('prayer_id').not().isEmpty(),
     body('mosque_id').not().isEmpty()
