@@ -29,11 +29,21 @@ const databaseConfig = {
     port: '3306'
 }
 
-const sequelize = new Sequelize(databaseConfig.databaseName, databaseConfig.username, databaseConfig.password, {
-    host: databaseConfig.host,
-    dialect: 'mysql',
-    port: databaseConfig.port
-})
+let sequelize = undefined;
+
+if(process.env.NODE_ENV === 'dev'){
+    sequelize = new Sequelize('backend-server', 'root', '', {
+        dialect: 'mysql',
+        host: 'localhost',
+    })
+} else {
+    sequelize = new Sequelize(databaseConfig.databaseName, databaseConfig.username, databaseConfig.password, {
+        host: databaseConfig.host,
+        dialect: 'mysql',
+        port: databaseConfig.port
+    })
+}
+
 
 sequelize.authenticate()
 
