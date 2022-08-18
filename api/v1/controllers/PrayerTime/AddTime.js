@@ -1,13 +1,25 @@
 const { PrayerTime } = require('../../../models/PrayerTime');
 
-const AddTime = async(req, res) => {
-    const { prayer_id, mosque_id, call_time, start_time } = req.body;
-    await PrayerTime.create({
-        prayer_id: prayer_id,
+async function setPrayerObject(prayer, mosque_id){
+    const { id, time } = prayer;
+    const object = {
+        prayer_id: id,
         mosque_id: mosque_id,
-        call_time: call_time,
-        start_time: start_time
-    })
+        start_time: time.azan,
+        call_time: time.iqama
+    }
+    return await PrayerTime.create(object)
+}
+
+const AddTime = async(req, res) => {
+    const { prayers, mosque_id } = req.body;
+    const { fajr, maghrib, isha, asr, dhuhr, jumaat } = prayers
+    
+   
+    
+    Promise.all([ setPrayerObject(fajr, mosque_id), setPrayerObject(maghrib, mosque_id), 
+        setPrayerObject(isha, mosque_id), setPrayerObject(asr, mosque_id),
+        setPrayerObject(dhuhr, mosque_id), setPrayerObject(jumaat, mosque_id) ])
     .then(data => {
         res.json({
             response: data,

@@ -12,7 +12,7 @@ const AddMosque = async(req, res) => {
             ...req.body
         })
         .then(data => res.json({ response:data }))
-        .catch(() => res.json({ response:'Error while adding mosque!' }))
+        .catch(() => res.json({ response:'Error while adding mosque!', body: req.body }))
     }
 
 }
