@@ -14,9 +14,7 @@ const app = express();
 
 
 app.use(bodyparser)
-app.use(cors({
-    origin: 'http://localhost:3000',
-}))
+
 app.get('/', (req, res) => {
     res.send("working")
     axios.get(`http://api.aladhan.com/v1/gToH?date=${todayDate}`, {
