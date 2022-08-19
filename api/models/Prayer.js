@@ -19,7 +19,7 @@ Prayer.init({
 
 },{
     sequelize,
-    tableName: 'Prayer',
+    tableName: 'prayer',
     modelName: 'Prayer'
 })
 

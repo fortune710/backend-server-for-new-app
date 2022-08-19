@@ -14,7 +14,7 @@ Denomination.init({
 }, {
     sequelize,
     tableName: 'denomination',
-    modelName: 'denomination'
+    modelName: 'Denomination'
 })
 
 
