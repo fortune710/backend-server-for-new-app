@@ -2,7 +2,6 @@ const { Op } = require('sequelize');
 const { MosqueBooks } = require('../../../models/MosqueBooks');
 const { Book } = require('../../../models/Books');
 const { makeid } = require('../../../../helpers/randomid');
-const { Book } = require('../../../models/Books');
 
 const checkIfBookExists = async(requestBody) => {
     const { id } = requestBody.book;
