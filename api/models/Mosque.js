@@ -26,6 +26,15 @@ Mosque.init({
     denomination: {
         type: DataTypes.STRING(40),
         allowNull: true
+    },
+    imam_name: {
+        type: DataTypes.STRING
+    },
+    email: {
+        type: DataTypes.STRING,
+    },
+    password: {
+        type: DataTypes.STRING
     }
 
 },{
