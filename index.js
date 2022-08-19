@@ -9,6 +9,7 @@ const { MosqueRouter } = require('./api/v1/routes/Mosque');
 const { AdminRouter } = require('./api/v1/routes/MosqueAdmin');
 const { PostRouter } = require('./api/v1/routes/Post');
 const { PrayerTimeRouter } = require('./api/v1/routes/PrayerTime');
+const { MosqueBookRouter } = require('v1/routes/MosqueBooks');
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use('/mosque', MosqueRouter)
 app.use('/admin', AdminRouter)
 app.use('/post', PostRouter)
 app.use('/prayer-time', PrayerTimeRouter)
+app.use('/mosque-books', MosqueBookRouter)
 
 const PORT = 4000;
 
