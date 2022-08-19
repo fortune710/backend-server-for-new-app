@@ -6,6 +6,8 @@ const { Position } = require('./Position');
 const { Followership } = require('./Followership');
 const { MosqueAdmins } = require('./MosqueAdmin');
 const { Denomination } = require('./Denomination');
+const { Book } = require('./Books');
+const { MosqueBooks } = require('./MosqueBooks');
 
 
 //Relationships for each table according to the ER Model
@@ -14,10 +16,14 @@ Prayer.hasOne(PrayerTime, {
 })
 PrayerTime.belongsTo(Prayer)
 
+MosqueBooks.hasMany(Book)
 
 
 Mosque.hasMany(PrayerTime)
 PrayerTime.belongsTo(Mosque)
+
+Mosque.hasMany(MosqueBooks)
+MosqueBooks.hasMany(Mosque)
 
 Mosque.hasOne(Denomination)
 Denomination.belongsTo(Mosque)
@@ -42,4 +48,4 @@ MosqueAdmins.hasOne(User)
 MosqueAdmins.hasOne(Position, {
     foreignKey: 'position'
 })
-Position.hasOne(MosqueAdmin)
+Position.hasOne(MosqueAdmins)
