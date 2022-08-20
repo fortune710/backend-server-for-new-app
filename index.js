@@ -13,6 +13,10 @@ const { MosqueBookRouter } = require('./api/v1/routes/MosqueBooks');
 
 const app = express();
 
+app.use(cors({
+    origin: '*',
+    methods: "GET, PUT, POST"
+}))
 
 app.use(bodyparser)
 
