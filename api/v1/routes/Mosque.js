@@ -15,13 +15,13 @@ const corsOpts = {
 }
 
 router.all('/create', cors(corsOpts))
-router.put('/create', (req, res) => AddMosque(req, res) )
+router.post('/create', (req, res) => AddMosque(req, res) )
 
 router.get('/:id', [
     body('id').notEmpty().trim()
 ], (req, res)=> GetMosque(req, res))
 
-router.put('/update', [
+router.post('/update', [
     body('id').notEmpty().trim()
 ], (req, res) => UpdateMosque(req,res))
 
