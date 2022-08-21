@@ -5,8 +5,8 @@ async function setPrayerObject(prayer, mosque_id){
     const object = {
         prayer_id: id,
         mosque_id: mosque_id,
-        start_time: time.azan,
-        call_time: time.iqama
+        start_time: time.iqama,
+        call_time: time.azan
     }
     return await PrayerTime.create(object)
 }

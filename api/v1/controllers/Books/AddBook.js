@@ -2,6 +2,12 @@ const { Op } = require('sequelize');
 const { MosqueBooks } = require('../../../models/MosqueBooks');
 const { Book } = require('../../../models/Books');
 const { makeid } = require('../../../../helpers/randomid');
+const { MosqueBookDay } = require('../../../models/MosqueBookDay');
+
+const addDifferentDays = (req, res) => {
+    
+}
+
 
 const checkIfBookExists = async(requestBody) => {
     const { id } = requestBody.book;

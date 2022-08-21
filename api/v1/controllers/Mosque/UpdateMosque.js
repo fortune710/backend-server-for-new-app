@@ -1,4 +1,4 @@
-const { User } = require('../../../models/User');
+const { Mosque } = require('../../../models/Mosque');
 
 
 const UpdateMosque = async(req, res) => {
@@ -8,7 +8,7 @@ const UpdateMosque = async(req, res) => {
         res.json({ response:'Data Missing!' })
         return
     } else {
-        await User.update({...req.body}, {
+        await Mosque.update({...req.body}, {
             where: {
                 id: id
             }
