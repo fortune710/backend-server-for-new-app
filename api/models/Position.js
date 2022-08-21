@@ -11,7 +11,7 @@ Position.init({
         type: DataTypes.SMALLINT
     },
     title: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING,
         allowNull: false,
     },
     

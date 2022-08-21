@@ -24,7 +24,6 @@ Prayer.init({
 })
 
 //Create the different prayers
-
 sequelize.sync()
 
 module.exports = {

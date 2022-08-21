@@ -9,7 +9,7 @@ Denomination.init({
         allowNull: false
     },
     title: {
-        type: DataTypes.STRING(50)
+        type: DataTypes.STRING
     }
 }, {
     sequelize,
