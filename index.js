@@ -22,13 +22,13 @@ app.use(function(req, res, next) {
 
 app.use(bodyparser)
 
-app.get('/', (req, res) => {
-    res.send("working")
-    axios.get(`http://api.aladhan.com/v1/gToH?date=${todayDate}`, {
-        headers: {
-            mode: 'cors'
-        }
-    })
+app.get('/', (req, res) => res.send("working"))
+
+app.get('/get-hijri-date', (req, res) => {
+
+    const todayDate = `${new Date().getDate()}-${new Date().getMonth()}-${new Date().getFullYear()}`
+
+    axios.get(`http://api.aladhan.com/v1/gToH?date=${todayDate}`)
     .then(({ data }) => {
         const { hijri } = data.data;
         res.json({ hijri_date: hijri.date })
@@ -38,6 +38,8 @@ app.get('/', (req, res) => {
         res.json({ response: 'Errror while getting date' })
     })
 })
+
+
 
 app.use('/auth', AuthRouter)
 app.use('/following', FollowRouter)
