@@ -10,7 +10,7 @@ Mosque.init({
         type: DataTypes.STRING(20),
     },
     name: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING,
         allowNull: false,
     },
     longitude: {
@@ -24,17 +24,23 @@ Mosque.init({
         allowNull: false
     },
     denomination: {
-        type: DataTypes.STRING(40),
+        type: DataTypes.STRING,
         allowNull: true
     },
     imam_name: {
         type: DataTypes.STRING
     },
-    email: {
-        type: DataTypes.STRING,
-    },
-    password: {
+    phone_number: {
         type: DataTypes.STRING
+    },
+    registered_by: {
+        type: DataTypes.STRING,
+        defaultValue: null,
+        allowNull: true
+    },
+    still_exists: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
     }
 
 },{
