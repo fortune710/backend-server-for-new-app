@@ -39,6 +39,7 @@ app.get('/get-hijri-date', (req, res) => {
     })
 })
 
+/*
 app.post('/get-timings', (req, res) => {
     const { longitude, latitude } = req.body;
 
@@ -70,7 +71,7 @@ app.post('/get-timings', (req, res) => {
            res.json({ response: apiResponse })
         })
     })
-})
+})*/
 
 
 
