@@ -39,6 +39,41 @@ app.get('/get-hijri-date', (req, res) => {
     })
 })
 
+app.post('/get-timings', (req, res) => {
+    const { longitude, latitude } = req.body;
+
+    axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${latitude},${longitude}.json?key=cv3tKFSbAtAezYKXxkmbGijh4GqiDl03`)
+    .then((data) => {
+        const { address } = data.data.addresses[0];
+
+        axios.get('http://api.aladhan.com/v1/timingsByCity', {
+            params: {
+                city: address.municipality,
+                country: address.country,
+                method: 8
+            }
+        })
+        .then((response) => {
+            const { timings } = response.data.data;
+            let prayers = JSON.parse(timings);
+
+            const apiResponse = {
+                state_name: address.countrySubdivision,
+                prayer_times: {
+                    fajr: prayers.fajr,
+                    dhuhr: prayers.dhuhr,
+                    asr: prayers.asr,
+                    maghrib: prayers.maghrib,
+                    isha: prayers.isha,
+                    jumaat: !prayers.jumaat ? 'N/A' : prayers.jumaat
+                }
+            }
+
+            return res.json({ response: apiResponse })
+        })
+    })
+})
+
 
 
 app.use('/auth', AuthRouter)
