@@ -40,42 +40,6 @@ app.get('/get-hijri-date', (req, res) => {
 })
 
 
-/*
-app.post('/get-timings', (req, res) => {
-    const { longitude, latitude } = req.body;
-
-    axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${latitude},${longitude}.json?key=cv3tKFSbAtAezYKXxkmbGijh4GqiDl03`)
-    .then((data) => {
-        const { address } = data.data.addresses[0];
-
-        axios.get('http://api.aladhan.com/v1/timingsByCity', {
-            params: {
-                city: address.municipality,
-                country: address.country,
-                method: 8
-            }
-        })
-        .then((response) => {
-            const { Fajr, Asr, Maghrib, Dhuhr, Isha } = response.data.data.timings;
-
-            const apiResponse = {
-                state_name: address.countrySubdivision,
-                prayer_times: {
-                    fajr: Fajr,
-                    dhuhr: Dhuhr,
-                    asr: Asr,
-                    maghrib: Maghrib,
-                    isha: Isha
-                }
-            }
-
-           res.json({ response: apiResponse })
-        })
-    })
-})*/
-
-
-
 app.use('/auth', AuthRouter)
 app.use('/following', FollowRouter)
 app.use('/mosque', MosqueRouter)
