@@ -47,7 +47,7 @@ app.post('/get-timings', (req, res) => {
     .then((data) => {
         const { address } = data.data.addresses[0];
 
-        axios.get('http://api.aladhan.com/v1/timingsByCity?', {
+        axios.get('http://api.aladhan.com/v1/timingsByCity', {
             params: {
                 city: address.municipality,
                 country: address.country,
