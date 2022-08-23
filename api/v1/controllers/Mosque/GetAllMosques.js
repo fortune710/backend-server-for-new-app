@@ -8,9 +8,6 @@ const GetAllMosques = async(req, res) => {
     return await Mosque.findAll({
         where: {
             still_exists: true,
-            registered_by: {
-                [Op.not]: null
-            } 
         }
     })
     .then(data => {
