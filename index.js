@@ -39,7 +39,7 @@ app.get('/get-hijri-date', (req, res) => {
     })
 })
 
-/*
+
 app.post('/get-timings', (req, res) => {
     const { longitude, latitude } = req.body;
 
@@ -47,7 +47,7 @@ app.post('/get-timings', (req, res) => {
     .then((data) => {
         const { address } = data.data.addresses[0];
 
-        axios.get('http://api.aladhan.com/v1/timingsByCity', {
+        axios.get('http://api.aladhan.com/v1/timingsByCity?', {
             params: {
                 city: address.municipality,
                 country: address.country,
@@ -71,7 +71,7 @@ app.post('/get-timings', (req, res) => {
            res.json({ response: apiResponse })
         })
     })
-})*/
+})
 
 
 
