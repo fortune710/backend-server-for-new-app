@@ -54,22 +54,20 @@ app.post('/get-timings', (req, res) => {
             }
         })
         .then((response) => {
-            const { timings } = response.data.data;
-            let prayers = JSON.parse(timings);
+            const { Fajr, Asr, Maghrib, Dhuhr, Isha } = response.data.data.timings;
 
             const apiResponse = {
                 state_name: address.countrySubdivision,
                 prayer_times: {
-                    fajr: prayers.fajr,
-                    dhuhr: prayers.dhuhr,
-                    asr: prayers.asr,
-                    maghrib: prayers.maghrib,
-                    isha: prayers.isha,
-                    jumaat: !prayers.jumaat ? 'N/A' : prayers.jumaat
+                    fajr: Fajr,
+                    dhuhr: Dhuhr,
+                    asr: Asr,
+                    maghrib: Maghrib,
+                    isha: Isha
                 }
             }
 
-            return res.json({ response: apiResponse })
+           res.json({ response: apiResponse })
         })
     })
 })
