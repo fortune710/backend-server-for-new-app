@@ -1,7 +1,7 @@
 const { Mosque } = require('../../../models/Mosque');
 
 const GetRegisteredMosques = async(req, res) => {
-    const { user_id } = req.params;
+    const { user_id } = req.body;
     
     return await Mosque.findAll({
         where: {

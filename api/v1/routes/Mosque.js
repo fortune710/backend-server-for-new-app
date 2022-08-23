@@ -37,7 +37,7 @@ router.post('/update', [
 router.post('/login', (req, res) => MosqueLogin(req,res) )
 router.post('/approve-mosque', (req, res) => ApproveMosque(req,res))
 router.get('/get-all', (req,res) => GetAllMosques(req,res))
-router.get('/get-all/:id', (req,res) => GetRegisteredMosques(req,res))
+router.post('/get-registered-mosques', (req,res) => GetRegisteredMosques(req,res))
 router.post('/delete', (req,res) => DeleteMosque(req,res))
 
 
