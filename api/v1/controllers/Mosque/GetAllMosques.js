@@ -5,16 +5,12 @@ const { Op } = require('sequelize');
 const GetAllMosques = async(req, res) => {
     const { longitude, latitude } = req.params;
 
-    return await Mosque.findAll({
-        where: {
-            still_exists: true,
-        }
-    })
+    await Mosque.findAll()
     .then(data => {
-        res.json({ response: data })
+        return res.json({ response: data })
     })
     .catch(err => {
-        res.json({ response: "Could not get all mosques!" })
+        return res.json({ response: "Could not get all mosques!" })
     })
 
     /*
