@@ -57,9 +57,9 @@ const AddMosque = async(req, res) => {
             registered_by: registered_by
         })
         .then(async(data) => {
-            const prayerTimes = await Promise.all([ setPrayerObject(fajr, mosque_id), setPrayerObject(maghrib, mosque_id), 
-                setPrayerObject(isha, mosque_id), setPrayerObject(asr, mosque_id),
-                setPrayerObject(dhuhr, mosque_id), setPrayerObject(jumaat, mosque_id) ])
+            const prayerTimes = await Promise.all([ setPrayerObject(fajr, data.id), setPrayerObject(maghrib, data.id), 
+                setPrayerObject(isha, data.id), setPrayerObject(asr, data.id),
+                setPrayerObject(dhuhr, data.id), setPrayerObject(jumaat, data.id) ])
                 .then(data => { return data })
             
             await MosqueAccount.create({
