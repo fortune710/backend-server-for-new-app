@@ -1,6 +1,7 @@
 const { Mosque } = require('../../../models/Mosque');
 const { makeid } = require('../../../../helpers/randomid');
 const {MosqueAccount} = require('../../../models/MosqueAccount');
+const { getPrayerTimes } = require('../../controllers/PrayerTime/GetTimes')
 
 
 const MosqueLogin = async(req, res) => {
@@ -18,8 +19,9 @@ const MosqueLogin = async(req, res) => {
         }) 
         .then(async(data) => {
             try{
-                const mosque = await Mosque.findByPk(data.id)
-                return res.json({ response: mosque })
+                const mosque = await Mosque.findByPk(data.mosque_id)
+                const times = await getPrayerTimes(data.mosque_id);
+                return res.json({ response: {...mosque.dataValues, prayers: times} })
             } catch(err) {
                 return res.json({ response: "Could not get Mosque Information" })
             }

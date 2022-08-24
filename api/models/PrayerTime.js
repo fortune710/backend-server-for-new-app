@@ -6,7 +6,7 @@ class PrayerTime extends Model {}
 
 PrayerTime.init({
     prayer_id: {
-        type: DataTypes.STRING(10),
+        type: DataTypes.SMALLINT,
         allowNull: false,
     },
     mosque_id: {
