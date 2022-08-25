@@ -22,10 +22,10 @@ const sequelize = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD , {
 */
 
 const databaseConfig = {
-    databaseName: 'sql5513562',
-    username: 'sql5513562',
-    password: 'YiICPYrllR',
-    host: 'sql5.freesqldatabase.com',
+    databaseName: 'iqama_db',
+    username: 'admin',
+    password: 'Fortune2003',
+    host: 'iqama-db.ctf1cjupbaww.us-east-1.rds.amazonaws.com',
     port: '3306'
 }
 
