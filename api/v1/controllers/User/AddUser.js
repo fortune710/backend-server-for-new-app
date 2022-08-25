@@ -1,5 +1,6 @@
 const { User } = require('../../../models/User');
 const { makeid } = require('../../../../helpers/randomid');
+const bcrypt = require('bcrypt');
 
 const checkForExistingAccount = async (body) => {
     const { email } = body;
@@ -21,6 +22,8 @@ const checkForExistingAccount = async (body) => {
 const AddUser = async (req, res) => {
     const { email, password, fname, lname, type } = req.body;
     const accountExists = await checkForExistingAccount(req.body).then(number => { return number })
+
+    const hashedPassword = await bcrypt.hash(password, 10)
     
     console.log(req.body)
     if(!fname || !lname || !email || !password){
@@ -32,7 +35,7 @@ const AddUser = async (req, res) => {
             fname: fname,
             lname: lname,
             email: email,
-            password: password,
+            password: hashedPassword,
             type: type,
         })
         .then(data => {
