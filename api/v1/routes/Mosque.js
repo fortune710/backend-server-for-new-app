@@ -13,6 +13,8 @@ const { MosqueLogin } = require('../controllers/Mosque/MosqueLogin');
 
 
 const cors = require('cors');
+
+router.use(cors())
 const corsOpts = {
     origin: '*',
     methods: [],
@@ -22,7 +24,14 @@ const corsOpts = {
 }
 
 router.all('/create', cors(corsOpts))
-router.post('/create', (req, res) => AddMosque(req, res) )
+router.post('/create', (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" ); 
+    AddMosque(req, res)
+})
 
 router.post('/get-pending-mosques', (req, res) => GetPendingMosques(req,res))
 
