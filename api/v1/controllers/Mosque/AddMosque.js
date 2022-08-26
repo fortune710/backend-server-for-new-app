@@ -32,7 +32,7 @@ async function setPrayerObject(prayer, mosque_id){
 
 const AddMosque = async(req, res) => {
 
-    const { email, password, name, longitude, latitude, registered_by } = req.body;
+    const { name, longitude, latitude, registered_by } = req.body;
     const { imam_name, address, denomination, phone_number, prayers } = req.body;
 
     const { fajr, maghrib, isha, asr, dhuhr, jumaat } = prayers
@@ -62,12 +62,6 @@ const AddMosque = async(req, res) => {
                 setPrayerObject(dhuhr, data.id), setPrayerObject(jumaat, data.id) ])
                 .then(data => { return data })
             
-            await MosqueAccount.create({
-                mosque_id: data.id,
-                email: email,
-                password: password
-            })
-
             const mosqueData = {
                 ...data.dataValues,
                 prayers: prayerTimes
