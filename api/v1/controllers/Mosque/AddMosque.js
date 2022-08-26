@@ -38,12 +38,9 @@ const AddMosque = async(req, res) => {
     const { fajr, maghrib, isha, asr, dhuhr, jumaat } = prayers
 
     
-    const emailExists = await checkIfEmailExists(email)
     if(!req.body){
         res.json({ response:'Data missing!' })
         return
-    } else if(emailExists){
-        return res.json({ response: "Email already in use" })
     } else {
         await Mosque.create({
             id: makeid(20),
