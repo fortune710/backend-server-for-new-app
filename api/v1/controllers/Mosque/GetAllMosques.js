@@ -9,9 +9,6 @@ const getUpcomingPrayerTimes = async (mosque_id) => {
     const times = await PrayerTime.findAll({
         where: {
             mosque_id: mosque_id, 
-            start_time: {
-                [Op.gt]: currentTime
-            }
         }
     })
     .then(res => {
@@ -22,16 +19,28 @@ const getUpcomingPrayerTimes = async (mosque_id) => {
 
 
 const GetAllMosques = async(req, res) => {
-    const { longitude, latitude } = req.params;
+    const { longitude, latitude } = req.body;
 
-    return await Mosque.findAll()
+    await Mosque.findAll({
+        where: {
+            still_exists: true
+        }
+    })
     .then(async(data) => {
-        const upcomingPrayers = await getUpcomingPrayerTimes()
+        const times = await PrayerTime.findAll({
+            where: {
+                mosque_id: data.id, 
+            }
+        })
+        .then(res => {
+            return res
+        })
         const apiResponse = {
             ...data.dataValues,
-            upcoming_prayers: upcomingPrayers
+            upcoming_prayers: times
         }
-        res.json({ response: apiResponse })
+        console.log(times)
+        return res.json({ response: data })
     })
     .catch(err => {
         res.json({ response: "Could not get all mosques!" })
