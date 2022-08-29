@@ -2,10 +2,31 @@ const { User } = require('../../../models/User');
 const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 
+const checkIfAccountDoesNotExist = async(email) => { // Should return true if account does not exist
+    await User.count({
+        where: {
+            email: email
+        }
+    })
+    .then(num => {
+        if(num > 0){ //If the account exists
+            return false
+        } else {
+            return true
+        }
+    })
+
+}
+
 const GetUser = async (req, res) => {
     const { id, email, password, login, sign_in_method }  = req.body;
 
     if(email && password && login){
+        if(checkIfAccountDoesNotExist(email)){
+            return res.status(400).json({ message: 'Account with this email does not exist' })
+        }
+
+
         if(sign_in_method === 'email'){
             await User.findOne({
                 where: {
