@@ -9,21 +9,21 @@ User.init({
         primaryKey: true,
         type: DataTypes.STRING(15)
     },
-    fname:{
-        type: DataTypes.STRING,
-    },
-    lname:{
+    name:{
         type: DataTypes.STRING,
     },
     password:{
         type: DataTypes.STRING(30),
-        allowNull: false,
+        allowNull: true,
     },
     email:{
         type: DataTypes.STRING,
     },
     type:{ //Admin, Custodian, or regular user
         type: DataTypes.SMALLINT,
+    },
+    sign_in_method: {
+        type: DataTypes.ENUM('email', 'google')
     },
     profile_pic:{ //Profile pucture is either a base64 string or a URL
         type: DataTypes.STRING,
