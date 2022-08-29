@@ -7,7 +7,7 @@ class User extends Model {}
 User.init({
     id: {
         primaryKey: true,
-        type: DataTypes.STRING(15)
+        type: DataTypes.STRING
     },
     name:{
         type: DataTypes.STRING,
