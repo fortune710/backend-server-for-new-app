@@ -11,6 +11,8 @@ const { PostRouter } = require('./api/v1/routes/Post');
 const { PrayerTimeRouter } = require('./api/v1/routes/PrayerTime');
 const { MosqueBookRouter } = require('./api/v1/routes/MosqueBooks');
 
+const { convertISOToTime } = require('./helpers/isototime')
+
 const app = express();
 
 app.use(cors({
@@ -28,6 +30,50 @@ app.use(function(req, res, next) {
 app.use(bodyparser)
 
 app.get('/', (req, res) => res.send("working"))
+
+app.post('/state-timings', (req, res) => {
+    const { country, city } = req.body;
+    axios.get('http://api.aladhan.com/v1/timingsByCity', {
+        params: {
+            city: city,
+            country: country,
+            method: 8
+        }
+    })
+    .then((response) => {
+        const { Fajr, Asr, Maghrib, Dhuhr, Isha } = response.data.data.timings;
+        
+        const date = convertISOToTime(new Date().toISOString())
+        const prayers = [
+            { name: 'Fajr', time:Fajr },
+            { name: 'Dhuhr', time: Dhuhr },
+            { name: 'Asr', time: Asr}, 
+            { name: 'Maghrib', time: Maghrib},
+            { name: 'Isha', time: Isha}  
+        ]
+        const nextPrayer = prayers.filter(prayer => date < prayer.time)
+
+        const apiResponse = {
+            state_name: address.countrySubdivision,
+            prayer_times: {
+                fajr: Fajr,
+                dhuhr: Dhuhr,
+                asr: Asr,
+                maghrib: Maghrib,
+                isha: Isha
+            },
+            next_prayer: nextPrayer.length === 0 ? prayers[0] : nextPrayer[0]
+
+        }
+
+        return res.json({ response: apiResponse })
+    })
+    .catch(err => {
+        return res.json({ response: err })
+    })
+
+
+})
 
 app.get('/get-hijri-date', (req, res) => {
 
