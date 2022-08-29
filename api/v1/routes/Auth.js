@@ -8,12 +8,10 @@ const { UpdateUser } = require('../controllers/User/UpdateUser');
 
 AuthRouter.get('/sign-in',[
     body('email').isEmail(),
-    body('password').isLength({ min: 5 })
 ], (req, res) => GetUser(req, res))
 
 AuthRouter.post('/sign-up', [
     body('email').isEmail(),
-    body('password').isLength({ min: 5 })
 ], (req, res) => AddUser(req, res))
 
 AuthRouter.put('/update-profile', [
