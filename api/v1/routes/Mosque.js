@@ -35,7 +35,7 @@ router.post('/create', (req, res) => {
 
 router.post('/get-pending-mosques', (req, res) => GetPendingMosques(req,res))
 
-router.get('/:id', [
+router.post('/:id', [
     body('id').notEmpty().trim()
 ], (req, res)=> GetMosque(req, res))
 
