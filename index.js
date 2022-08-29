@@ -32,7 +32,7 @@ app.use(bodyparser)
 app.get('/', (req, res) => res.send("working"))
 
 app.post('/state-timings', (req, res) => {
-    const { country, city } = req.body;
+    const { country, city, state } = req.body;
     axios.get('http://api.aladhan.com/v1/timingsByCity', {
         params: {
             city: city,
@@ -47,14 +47,14 @@ app.post('/state-timings', (req, res) => {
         const prayers = [
             { name: 'Fajr', time:Fajr },
             { name: 'Dhuhr', time: Dhuhr },
-            { name: 'Asr', time: Asr}, 
-            { name: 'Maghrib', time: Maghrib},
-            { name: 'Isha', time: Isha}  
+            { name: 'Asr', time: Asr }, 
+            { name: 'Maghrib', time: Maghrib },
+            { name: 'Isha', time: Isha }  
         ]
         const nextPrayer = prayers.filter(prayer => date < prayer.time)
 
         const apiResponse = {
-            state_name: address.countrySubdivision,
+            state_name: state,
             prayer_times: {
                 fajr: Fajr,
                 dhuhr: Dhuhr,
