@@ -22,7 +22,7 @@ const GetUser = async (req, res) => {
     const { id, email, password, login, sign_in_method }  = req.body;
 
     if(email && password && login){
-        if(checkIfAccountDoesNotExist(email)){
+        if(!checkIfAccountDoesNotExist(email)){
             return res.status(400).json({ message: 'Account with this email does not exist' })
         }
 
@@ -43,7 +43,7 @@ const GetUser = async (req, res) => {
                 }
                 else {
                     const passwordsMatch = await bcrypt.compare(password, data.password)
-    
+                    console.log(password, data.password)
                     if(passwordsMatch){
                         return res.json({ 
                             response: data,
