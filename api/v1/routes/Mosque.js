@@ -35,9 +35,6 @@ router.post('/create', (req, res) => {
 
 router.post('/get-pending-mosques', (req, res) => GetPendingMosques(req,res))
 
-router.post('/:id', [
-    body('id').notEmpty().trim()
-], (req, res)=> GetMosque(req, res))
 
 router.post('/update', [
     body('id').notEmpty().trim()
@@ -48,6 +45,10 @@ router.post('/approve-mosque', (req, res) => ApproveMosque(req,res))
 router.post('/get-all', (req,res) => GetAllMosques(req,res))
 router.post('/get-registered-mosques', (req,res) => GetRegisteredMosques(req,res))
 router.post('/delete', (req,res) => DeleteMosque(req,res))
+
+router.put('/:id', [
+    body('id').notEmpty().trim()
+], (req, res)=> GetMosque(req, res))
 
 
 module.exports = {
