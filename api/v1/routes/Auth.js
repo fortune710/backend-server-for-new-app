@@ -6,7 +6,7 @@ const { AddUser } = require('../controllers/User/AddUser');
 const { GetUser } = require('../controllers/User/GetUser');
 const { UpdateUser } = require('../controllers/User/UpdateUser');
 
-AuthRouter.get('/sign-in',[
+AuthRouter.post('/sign-in',[
     body('email').isEmail(),
 ], (req, res) => GetUser(req, res))
 
