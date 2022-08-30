@@ -3,6 +3,7 @@ const { body } = require('express-validator')
 
 const { AddTime } = require('../controllers/PrayerTime/AddTime');
 const { UpdateTime } = require('../controllers/PrayerTime/UpdateTime');
+const { GetNextPrayer } = require('../controllers/PrayerTime/GetNextPrayer');
 
 const cors = require('cors');
 const corsOpts = {
@@ -27,6 +28,8 @@ router.put('/update', [
     body('prayer_id').not().isEmpty(),
     body('mosque_id').not().isEmpty()
 ], (req, res) => UpdateTime(req, res))
+
+router.get('/:id', (req,res) => GetNextPrayer(req,res))
 
 module.exports = {
     PrayerTimeRouter: router
