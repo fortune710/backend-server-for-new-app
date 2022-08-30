@@ -46,25 +46,8 @@ router.post('/update', [
 router.post('/login', (req, res) => MosqueLogin(req,res) )
 router.post('/approve-mosque', (req, res) => ApproveMosque(req,res))
 router.post('/get-all', (req,res) => GetAllMosques(req,res))
-
-router.post('/get-registered-mosques', (req,res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*")
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.setHeader("Access-Control-Max-Age", "1800");
-    res.setHeader("Access-Control-Allow-Headers", "content-type");
-    res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" ); 
-    GetRegisteredMosques(req,res)
-})
-
-
-router.post('/delete', (req,res) =>{
-    res.setHeader("Access-Control-Allow-Origin", "*")
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.setHeader("Access-Control-Max-Age", "1800");
-    res.setHeader("Access-Control-Allow-Headers", "content-type");
-    res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" ); 
-    DeleteMosque(req,res)
-})
+router.post('/get-registered-mosques', (req,res) => GetRegisteredMosques(req,res))
+router.post('/delete', (req,res) => DeleteMosque(req,res))
 
 
 module.exports = {
