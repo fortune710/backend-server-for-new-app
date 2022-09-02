@@ -7,6 +7,13 @@ const { FlagPost } = require('../controllers/Post/FlagPost');
 
 const uploadFile = require('../../config/cloudinary')
 
+router.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    next();
+});
+
 router.put('/create', [
     body('user_id').trim(),
     body('mosque_id').trim(),
