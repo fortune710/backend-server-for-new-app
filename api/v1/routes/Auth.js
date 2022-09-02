@@ -6,7 +6,7 @@ const { AddUser } = require('../controllers/User/AddUser');
 const { GetUser } = require('../controllers/User/GetUser');
 const { UpdateUser } = require('../controllers/User/UpdateUser');
 
-router.use(function(req, res, next) {
+AuthRouter.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
