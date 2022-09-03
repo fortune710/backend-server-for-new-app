@@ -2,6 +2,7 @@ const express = require('express');
 const bodyparser = require('body-parser').json()
 const cors = require('cors');
 const axios = require('axios');
+const moment = require('moment');
 
 const { AuthRouter } = require('./api/v1/routes/Auth')
 const { FollowRouter } = require('./api/v1/routes/FollowMosque')
@@ -44,6 +45,7 @@ app.post('/state-timings', (req, res) => {
         const { Fajr, Asr, Maghrib, Dhuhr, Isha } = response.data.data.timings;
         
         const date = convertISOToTime(new Date().toISOString())
+        const compareTime = moment(date, "hh:mm")
         const prayers = [
             { name: 'Fajr', time:Fajr },
             { name: 'Dhuhr', time: Dhuhr },
@@ -51,7 +53,10 @@ app.post('/state-timings', (req, res) => {
             { name: 'Maghrib', time: Maghrib },
             { name: 'Isha', time: Isha }  
         ]
-        const nextPrayer = prayers.filter(prayer => date < prayer.time)
+        const closestTime = prayers.find((time) => {
+            const diff = moment(time.time, "hh:mm").diff(compareTime, 'minutes')
+            return diff >= 0
+        })
 
         const apiResponse = {
             state_name: state,
@@ -62,8 +67,7 @@ app.post('/state-timings', (req, res) => {
                 maghrib: Maghrib,
                 isha: Isha
             },
-            next_prayer: nextPrayer.length === 0 ? prayers[0] : nextPrayer[0]
-
+            next_prayer: closestTime
         }
 
         return res.json({ response: apiResponse })
