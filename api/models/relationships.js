@@ -9,6 +9,8 @@ const { Denomination } = require('./Denomination');
 const { Book } = require('./Books');
 const { MosqueBooks } = require('./MosqueBooks');
 
+const { sequelize } = require('../config/db');
+
 
 //Relationships for each table according to the ER Model
 Prayer.hasOne(PrayerTime, {
@@ -49,3 +51,5 @@ MosqueAdmins.hasOne(Position, {
     foreignKey: 'position'
 })
 Position.hasOne(MosqueAdmins)
+
+sequelize.sync()
