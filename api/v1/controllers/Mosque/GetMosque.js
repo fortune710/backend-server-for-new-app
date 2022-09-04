@@ -1,8 +1,24 @@
 const { Mosque } = require('../../../models/Mosque');
 const { PrayerTime } = require('../../../models/PrayerTime');
 const { Followership } = require('../../../models/Followership');
+const { MosqueAdmins } = require('../../../models/MosqueAdmin');
 const { Op } = require('sequelize');
 
+const getAdmins = async(mosque_id) => {
+    const admins = await MosqueAdmins.findAll({
+        where: {
+            mosque_id: mosque_id
+        }
+    })
+    .then(data => { 
+        if(data){
+            return data
+        } else {
+            return []
+        }
+     })
+    return admins
+}
 
 const checkIfUserIsFollowing = async(user_id, mosque_id) => { // Should return false if user is not following
 
@@ -38,10 +54,12 @@ const getPrayerTimes = async (id) => {
 
 const GetMosque = async(req, res) => {
     const { id } = req.params;
-    const { user_id, mosque_id } = req.body;
+    const { user_id } = req.body;
+    
     const prayers = await getPrayerTimes(id);
-    const isFollowing = await checkIfUserIsFollowing(user_id, mosque_id)
-
+    const isFollowing = await checkIfUserIsFollowing(user_id, id)
+    const admins = await getAdmins(id)
+    
     if(!id || !req.body){
         return res.json({ response:'Data missing!' })
     } else {
@@ -49,7 +67,8 @@ const GetMosque = async(req, res) => {
             const mosqueData = {
                 ...data.dataValues,
                 is_following: isFollowing,
-                prayer_times: prayers
+                prayer_times: prayers,
+                admins: admins
             }
             res.json({ response: mosqueData })
         })
