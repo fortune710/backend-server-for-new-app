@@ -1,5 +1,5 @@
 const { User } = require('../../../models/User');
-const { Op } = require('sequelize');
+const { Followership } = require('../../../models/Followership');
 const bcrypt = require('bcrypt');
 
 const checkIfAccountDoesNotExist = async(email) => { // Should return true if account does not exist
@@ -18,6 +18,24 @@ const checkIfAccountDoesNotExist = async(email) => { // Should return true if ac
 
 }
 
+const checkMosquesUserIsFollowing = async (user_id) => {
+    if(!user_id) return
+
+    const mosques = await Followership.findAll({
+        where: {
+            user_id: user_id
+        }
+    })
+    .then((followerships) => {
+        let mosque_ids = []
+        followerships.forEach(record => {
+            mosque_ids = [...mosque_ids, record.mosque_id]
+        })
+        return mosque_ids
+    })
+    return mosques
+}
+
 const GetUser = async (req, res) => {
     const { id, email, password, login, sign_in_method }  = req.body;
 
@@ -34,7 +52,8 @@ const GetUser = async (req, res) => {
                 }
             })
             .then(async(data) => {
-    
+                const userMosques = await checkMosquesUserIsFollowing(data?.id)
+
                 if(data === null){
                     return res.json({ response: 'Account does not exist or your details are incorrect' })
                 } 
@@ -46,7 +65,8 @@ const GetUser = async (req, res) => {
                     console.log(password, data.password)
                     if(passwordsMatch){
                         return res.json({ 
-                            response: data,
+                            user_data: data,
+                            mosques_follow: userMosques,
                             message: 'Account found!'
                         })
                     } else {
@@ -57,10 +77,11 @@ const GetUser = async (req, res) => {
             })
             .catch(() => res.json({ response: 'There was a problem finding your account' }))
         } else if(sign_in_method === 'google') {
+            const userMosques = await checkMosquesUserIsFollowing(data?.id)
 
             await User.findByPk(id)
             .then(data => {
-                return res.json({ user_data: data })
+                return res.json({ user_data: data, mosques_follow: userMosques })
             })
             .catch(err => {
                 return res.json({ message: 'Could not get user data!', code: err })
@@ -72,12 +93,13 @@ const GetUser = async (req, res) => {
 
     } 
     else if(!login) {
+        const userMosques = await checkMosquesUserIsFollowing(data?.id)
 
         if(id){
             await User.findByPk(id, { 
                 attributes: { exclude: ['email', 'password'] }
             }).then(data => {
-                return res.json({ user_data: data })
+                return res.json({ user_data: data, mosques_follow: userMosques })
             })
             .catch((err) => res.json({ response:'Error while getting user!', code:err }))
         } 
