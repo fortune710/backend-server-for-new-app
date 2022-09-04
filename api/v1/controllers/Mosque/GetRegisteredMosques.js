@@ -1,8 +1,21 @@
 const { Op } = require('sequelize');
 const { Mosque } = require('../../../models/Mosque');
+const { isPointWithinRadius } = require('geolib');
+
+const checkIfPointIsWithinRadius = async(userCoordinates, mosque) => {
+    const mosqueCoords = { latitude: mosque.latitude, longitude: mosque.longitude }
+    const coords = isPointWithinRadius(mosqueCoords, userCoordinates, 10000)
+    if(coords){
+        return mosque
+    } else {
+        return
+    }
+}
 
 const GetRegisteredMosques = async(req, res) => {
-    const { user_id } = req.body;
+    const { user_id, latitude, longitude } = req.body;
+    const userCoordinates = { latitude: latitude, longitude: longitude };
+
     if(user_id){
         return await Mosque.findAll({
             where: {
@@ -11,10 +24,10 @@ const GetRegisteredMosques = async(req, res) => {
             }
         })
         .then(data => {
-            res.json({ response: data })
+            return res.json({ response: data })
         })
         .catch(err => {
-            res.json({ response: "Could not get registered mosques!" })
+            return res.json({ response: "Could not get registered mosques!" })
         })
     } else {
         return await Mosque.findAll({
@@ -26,7 +39,21 @@ const GetRegisteredMosques = async(req, res) => {
             }
         })
         .then(data => {
-            res.json({ response: data })
+            if(latitude && longitude){
+                let closeByMosques = []
+                Promise.all(data.map((mosque) => {
+                    checkIfPointIsWithinRadius(userCoordinates, mosque)
+                    .then(data => { 
+                        closeByMosques = [...closeByMosques, data]
+                     })
+                }))
+                .then(() => {
+                    return res.json({ close_by_mosques: closeByMosques.filter(el => el != null) })
+    
+                })
+            } else {
+                return res.json({ all_mosques: data })
+            }
         })
         .catch(err => {
             res.json({ response: "Could not get registered mosques!" })
