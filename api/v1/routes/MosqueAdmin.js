@@ -1,10 +1,10 @@
 const router = require('express').Router()
-const { body } = require('express-validator')
+const { body, param } = require('express-validator')
 
 
 const { AddAdmin } = require('../controllers/MosqueAdmin/AddAdmin');
 const { RemoveAdmin } = require('../controllers/MosqueAdmin/RemoveAdmin');
-
+const { GetCustodianWithMosque } = require('../controllers/MosqueAdmin/GetCustodian')
 
 router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -12,6 +12,10 @@ router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
 });
+
+router.get('/custodian', [
+    param('user_id')
+], (req, res) => GetCustodianWithMosque(req, res))
 
 router.put('/create', [ 
     body('user_id').notEmpty().trim(),
