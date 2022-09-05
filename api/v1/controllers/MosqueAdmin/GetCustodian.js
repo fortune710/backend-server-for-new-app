@@ -4,6 +4,7 @@ const { Mosque } = require('../../../models/Mosque');
 
 const GetMosques = async(mosque_id) => {
     const mosque = await Mosque.findByPk(mosque_id)
+    .then(res => { return res })
     return mosque
 }
 
@@ -20,13 +21,11 @@ const getCustodianForMosque = async(req, res) => {
             let mosques = []
             Promise.all(data.map(record => {
                 GetMosques(record.mosque_id)
-                .then(res => {
-                    mosques = [...mosques, res]
+                .then(data => {
+                    return res.json({ mosques: data })
+                    
                 })
             }))
-            .then(() => {
-                return res.json({ mosques: mosques })
-            })
         })
     }
 }
