@@ -2,7 +2,7 @@ const router = require('express').Router()
 const { GetFollow }  = require('../controllers/Followership/GetFollow');
 const { AddFollower } = require('../controllers/Followership/AddFollower');
 const { DeleteFollower } = require('../controllers/Followership/DeleteFollower')
-const { body } = require('express-validator');
+const { body, param } = require('express-validator');
 
 router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -11,10 +11,8 @@ router.use(function(req, res, next) {
     next();
 });
 
-router.get('/check', [
-    body('user_id').not().isEmpty().trim(),
-    body('mosque_id').not().isEmpty().trim(),
-], (req, res) => GetFollow(req, res) )
+//Gets all the mosques that a user is following
+router.get('/mosques/:id', (req, res) => GetFollow(req, res) )
 
 
 router.put('/add', [
