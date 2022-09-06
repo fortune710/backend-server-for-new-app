@@ -15,7 +15,7 @@ Followership.init({
     },
     status: {
         type: DataTypes.STRING(10), 
-        allowNull: false
+        allowNull: true
     },
 
 
