@@ -65,7 +65,7 @@ const GetUser = async (req, res) => {
                     console.log(password, data.password)
                     if(passwordsMatch){
                         return res.json({ 
-                            user_data: {...data, mosques_follow: userMosques},
+                            user_data: {...data.dataValues, mosques_follow: userMosques},
                             message: 'Account found!'
                         })
                     } else {
@@ -80,7 +80,7 @@ const GetUser = async (req, res) => {
 
             await User.findByPk(id)
             .then(data => {
-                return res.json({ user_data: {...data, mosques_follow: userMosques} })
+                return res.json({ user_data: {...data.dataValues, mosques_follow: userMosques} })
             })
             .catch(err => {
                 return res.json({ message: 'Could not get user data!', code: err })
@@ -98,7 +98,7 @@ const GetUser = async (req, res) => {
             await User.findByPk(id, { 
                 attributes: { exclude: ['email', 'password'] }
             }).then(data => {
-                return res.json({ user_data: {...data, mosques_follow: userMosques} })
+                return res.json({ user_data: {...data.dataValues, mosques_follow: userMosques} })
             })
             .catch((err) => res.json({ response:'Error while getting user!', code:err }))
         } 
