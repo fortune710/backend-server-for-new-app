@@ -1,7 +1,7 @@
 const { Followership } = require('../../../models/Followership');
 
 const DeleteFollower = async(req, res) => {
-    const { user_id, mosque_id } = req.body;
+    const { user_id, mosque_id } = req.params;
     
     await Followership.destroy({
         where: {
