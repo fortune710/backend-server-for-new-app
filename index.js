@@ -44,7 +44,7 @@ app.post('/state-timings', (req, res) => {
     .then((response) => {
         const { Fajr, Asr, Maghrib, Dhuhr, Isha } = response.data.data.timings;
         
-        const date = convertISOToTime(new Date().toISOString())
+        const date = moment(new Date().toISOString()).format("HH:mm")
         const compareTime = moment(date, "hh:mm")
         const prayers = [
             { name: 'Fajr', time:Fajr },
