@@ -37,7 +37,7 @@ router.put('/update', [
     body('mosque_id').not().isEmpty()
 ], (req, res) => UpdateTime(req, res))
 
-router.get('/', (req,res) => getPrayerTimes(req,res))
+router.post('/get', (req,res) => getPrayerTimes(req,res))
 
 module.exports = {
     PrayerTimeRouter: router
