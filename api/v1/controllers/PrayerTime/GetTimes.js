@@ -2,7 +2,7 @@ const { Prayer } = require('../../../models/Prayer');
 const { PrayerTime } = require('../../../models/PrayerTime');
 
 const getPrayerTimes = async(req, res) => {
-    const {mosque_id} = req.params;
+    const {mosque_id} = req.body;
 
     await PrayerTime.findAll({
         where: {

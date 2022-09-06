@@ -1,31 +1,32 @@
 const { Followership } = require('../../../models/Followership');
 const { Op } = require('sequelize');
+const { Mosque } = require('../../../models/Mosque');
 
+const getMosque = async(mosque_id) => {
+    const mosque = await Mosque.findByPk(mosque_id).
+    then(res => {
+        return res
+    })
+
+    return mosque
+}
 
 const GetFollow = async(req, res) => {
-    const { user_id, mosque_id } = req.body;
+    const { id } = req.params;
 
-    if(!req.body){
+    if(!req.params){
         res.json({ response: 'Data misssing!' })
         return
     } else {
-        await Followership.count({
+        await Followership.findAll({
             where: {
-                [Op.and]: [
-                    { user_id: user_id },
-                    { mosque_id: mosque_id }
-                ]
+                user_id: id
             }
         })
-        .then(data => {
-            if(number < 1)
-                res.json({ response: {
-                    following: false
-                } })
-            else 
-            res.json({ response: {
-                following: true
-            } })
+        .then(async(data) => {
+            let promiseArray = data.map(item => (getMosque(item.mosque_id)))
+            const mosques = await Promise.all(promiseArray)
+            return res.json({ following: mosques })
 
         })
         .catch(()=>{
