@@ -24,8 +24,11 @@ const AddFollower = async(req, res) => {
         res.json({ response:'Data missing!' })
     } 
     else {
-        await Followership.create({
-            ...req.body
+        await Followership.findOrCreate({
+            where: {
+                user_id: user_id,
+                mosque_id: mosque_id
+            }
         })
         .then(data => {
             res.json({ response: {
