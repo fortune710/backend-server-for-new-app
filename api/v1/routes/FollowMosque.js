@@ -20,7 +20,7 @@ router.put('/add', [
     body('mosque_id').not().isEmpty().trim(),
 ], (req, res) => AddFollower(req, res))
 
-router.delete('/remove',[
+router.post('/remove',[
     body('user_id').not().isEmpty().trim(),
     body('mosque_id').not().isEmpty().trim(),
 ], (req,res) => DeleteFollower(req, res))
