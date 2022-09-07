@@ -13,9 +13,7 @@ router.use(function(req, res, next) {
     next();
 });
 
-router.get('/custodian', [
-    param('user_id')
-], (req, res) => GetCustodianWithMosque(req, res))
+router.get('/custodian/:user_id', (req, res) => GetCustodianWithMosque(req, res))
 
 router.put('/create', [ 
     body('user_id').notEmpty().trim(),
