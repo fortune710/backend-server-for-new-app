@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { body } = require('express-validator')
+const { body, param } = require('express-validator')
 
 const { AddMosque } = require('../controllers/Mosque/AddMosque')
 const { UpdateMosque } = require('../controllers/Mosque/UpdateMosque')
@@ -55,9 +55,7 @@ router.post('/get-all', (req,res) => GetAllMosques(req,res))
 router.post('/get-registered-mosques', (req,res) => GetRegisteredMosques(req,res))
 router.post('/delete', (req,res) => DeleteMosque(req,res))
 
-router.put('/:id', [
-    body('id').notEmpty().trim()
-], (req, res)=> GetMosque(req, res))
+router.put('/:id', (req, res)=> GetMosque(req, res))
 
 
 module.exports = {
