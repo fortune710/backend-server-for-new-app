@@ -4,7 +4,7 @@ const { isPointWithinRadius } = require('geolib');
 
 const checkIfPointIsWithinRadius = async(userCoordinates, mosque) => {
     const mosqueCoords = { latitude: mosque.latitude, longitude: mosque.longitude }
-    const coords = isPointWithinRadius(mosqueCoords, userCoordinates, 10000)
+    const coords = isPointWithinRadius(mosqueCoords, userCoordinates, 2500)
     if(coords){
         return mosque
     } else {
