@@ -31,8 +31,6 @@ router.put('/add', [
 
 
 router.put('/update', [
-    body('call_time').trim(),
-    body('start_time').trim(),
     body('prayer_id').not().isEmpty(),
     body('mosque_id').not().isEmpty()
 ], (req, res) => UpdateTime(req, res))
