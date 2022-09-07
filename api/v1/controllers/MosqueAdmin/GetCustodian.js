@@ -15,17 +15,16 @@ const getCustodianForMosque = async(req, res) => {
         return res.status(400).json({ message: 'Route param user_id missing' })
     } else {
         await MosqueAdmins.findAll({
-            user_id: user_id,
+            where: {
+                user_id: user_id
+            }
         })
-        .then(data => {
+        .then(async(data) => {
             let mosques = []
-            Promise.all(data.map(record => {
-                GetMosques(record.mosque_id)
-                .then(data => {
-                    return res.json({ mosques: data })
-                    
-                })
-            }))
+            await Mosque.findByPk(data[0].mosque_id)
+            .then((mosque) => {
+                res.json({ mosque: mosque })
+            })
         })
     }
 }
