@@ -18,6 +18,9 @@ MosqueBookDay.init({
     },
     day: { //Day of the week in digit
         type: DataTypes.SMALLINT
+    },
+    start_time: {
+        type: DataTypes.TIME
     }
 }, 
 {

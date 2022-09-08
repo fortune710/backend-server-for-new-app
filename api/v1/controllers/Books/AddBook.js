@@ -27,37 +27,43 @@ const checkIfBookExists = async(requestBody) => {
 
 
 const AddBook = async(req, res) => {
-    const { book, mosque_id, start_time, stop_time } = req.body;
+    const { mosque_id, book } = req.body;
+    const { name, days, teacher, } = book;
 
     if(!req.body){
         res.json({ response: "Data missing!" })
         return;
     } 
-    else if(checkIfBookExists(req.body)){
-        const mosqueBook = await MosqueBooks.create({
-            id: makeid(10),
-            book_id: book.id,
-            mosque_id: mosque_id,
-            start_time: start_time,
-            stop_time: stop_time
-        })
-        return res.json({ data: mosqueBook })
-    }
     else {
-        await Book.create({
+        await MosqueBooks.create({
             id: makeid(10),
-            name: book.name
+            book_id: makeid(10),
+            book_name: name,
+            mosque_id: mosque_id,
+            teacher: teacher
         })
-        .then(async (res) => {
-            const mosqueBook = await MosqueBooks.create({
-                id: makeid(10),
-                book_id: res.id,
-                mosque_id: mosque_id,
-                start_time: start_time,
-                stop_time: stop_time
+        .then((res) => {
+            Promise.all(
+                days.map(async(day) => {
+                    await MosqueBookDay.create({
+                        id: makeid(12),
+                        book_id: res.book_id,
+                        mosque_id: res.mosque_id,
+                        day: day.code,
+                        start_time: day.startTime,
+                    })
+                })
+            ).then(data => {
+                return res.json({ message: "Book was added sucessfully", book_data: data })
             })
-            return res.json({ data: {res, mosqueBook} })
+            .catch((err) => {
+                return res.status(400).json({ message: "Could not add book days", code: err })
+            })
         })
+        .catch((err) => {
+            return res.status(400).json({ message:"Could not add book", code: err })
+        })
+        
     }
 }
 

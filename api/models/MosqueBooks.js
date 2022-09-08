@@ -17,11 +17,12 @@ MosqueBooks.init({
         type: DataTypes.STRING(20),
         allowNull: false,
     },
-    start_time: {
-        type: DataTypes.TIME
+    book_name: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
-    stop_time: {
-        type: DataTypes.TIME
+    teacher: {
+        type: DataTypes.STRING
     },
     has_finished: {
         type: DataTypes.BOOLEAN,
