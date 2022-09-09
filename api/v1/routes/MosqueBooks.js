@@ -4,6 +4,9 @@ const { UpdateTime } = require('../controllers/Books/UpdateTime');
 const { SetBookFinished } = require('../controllers/Books/BookFinished');
 const { GetBook } = require('../controllers/Books/GetBook');
 const { GetUpcomingBooks } = require('../controllers/Books/GetBooks');
+const cors = require('cors');
+
+router.use(cors())
 
 router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
