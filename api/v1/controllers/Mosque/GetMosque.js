@@ -2,6 +2,8 @@ const { Mosque } = require('../../../models/Mosque');
 const { PrayerTime } = require('../../../models/PrayerTime');
 const { Followership } = require('../../../models/Followership');
 const { MosqueAdmins } = require('../../../models/MosqueAdmin');
+const { MosqueBooks } = require('../../../models/MosqueBooks');
+const { MosqueBookDay } = require('../../../models/MosqueBookDay');
 const { Op } = require('sequelize');
 
 const getAdmins = async(mosque_id) => {
@@ -52,6 +54,22 @@ const getPrayerTimes = async (id) => {
     }
 }
 
+const getBooks = async (mosque_id) => {
+    const books = await MosqueBooks.findAll({
+        where: {
+            mosque_id: mosque_id
+        }
+    })
+    .then(res => {
+        if(res !== null){
+            return res
+        } else {
+            return []
+        }
+    })
+    return books
+}
+
 const GetMosque = async(req, res) => {
     const { id } = req.params;
     const { user_id } = req.body;
@@ -59,6 +77,7 @@ const GetMosque = async(req, res) => {
     const prayers = await getPrayerTimes(id);
     const isFollowing = await checkIfUserIsFollowing(user_id, id)
     const admins = await getAdmins(id)
+    const books = await getBooks(id)
     
     if(!id || !req.body){
         return res.json({ response:'Data missing!' })
@@ -68,7 +87,8 @@ const GetMosque = async(req, res) => {
                 ...data.dataValues,
                 is_following: isFollowing,
                 prayer_times: prayers,
-                admins: admins
+                admins: admins,
+                books: books
             }
             res.json({ response: mosqueData })
         })
