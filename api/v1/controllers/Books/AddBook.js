@@ -42,13 +42,13 @@ const AddBook = async(req, res) => {
             mosque_id: mosque_id,
             teacher: teacher
         })
-        .then((res) => {
+        .then((response) => {
             Promise.all(
                 days.map(async(day) => {
                     await MosqueBookDay.create({
                         id: makeid(12),
-                        book_id: res.book_id,
-                        mosque_id: res.mosque_id,
+                        book_id: response.book_id,
+                        mosque_id: response.mosque_id,
                         day: day.code,
                         start_time: day.startTime,
                     })
