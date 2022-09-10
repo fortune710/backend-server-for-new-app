@@ -37,6 +37,7 @@ const AddMosque = async(req, res) => {
 
     const { fajr, maghrib, isha, asr, dhuhr, jumaat } = prayers
 
+    console.log(prayers)
     
     if(!req.body){
         res.json({ response:'Data missing!' })
