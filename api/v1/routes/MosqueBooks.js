@@ -16,10 +16,10 @@ router.use(function(req, res, next) {
 });
 
 router.post('/add', (req, res) => AddBook(req, res))
-router.put('/update-time', (req, res) => UpdateTime(req,res))
-router.put('/book-finished', (req, res) => SetBookFinished(req,res))
+router.post('/update-time', (req, res) => UpdateTime(req,res))
+router.post('/book-finished', (req, res) => SetBookFinished(req,res))
 
-router.put('/upcoming-books', (req, res) => GetUpcomingBooks(req, res)) 
+router.post('/upcoming-books', (req, res) => GetUpcomingBooks(req, res)) 
 router.get('/book/:id', (req, res) => GetBook(req, res))
 
 module.exports = {
