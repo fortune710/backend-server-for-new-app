@@ -5,6 +5,7 @@ const AuthRouter = express.Router();
 const { AddUser } = require('../controllers/User/AddUser');
 const { GetUser } = require('../controllers/User/GetUser');
 const { UpdateUser } = require('../controllers/User/UpdateUser');
+const {ChangePassword} = require('../controllers/User/ChangePassword');
 
 AuthRouter.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -24,6 +25,10 @@ AuthRouter.post('/sign-up', [
 AuthRouter.put('/update-profile', [
     body('id').trim()
 ], (req, res) => UpdateUser(req, res))
+
+AuthRouter.put('/change-password', [
+    body('user_id').trim()
+], (req, res) => ChangePassword(req, res))
 
 module.exports = {
     AuthRouter: AuthRouter

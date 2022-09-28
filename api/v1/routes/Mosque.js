@@ -10,7 +10,7 @@ const { GetAllMosques } = require('../controllers/Mosque/GetAllMosques');
 const { DeleteMosque } = require('../controllers/Mosque/DeleteMosque');
 const { GetRegisteredMosques } = require('../controllers/Mosque/GetRegisteredMosques');
 const { MosqueLogin } = require('../controllers/Mosque/MosqueLogin');
-
+const { SearchForMosque } = require('../controllers/Mosque/SearchForMosque');
 
 const cors = require('cors');
 
@@ -52,7 +52,8 @@ router.post('/get-all', (req,res) => GetAllMosques(req,res))
 router.post('/get-registered-mosques', (req,res) => GetRegisteredMosques(req,res))
 router.post('/delete', (req,res) => DeleteMosque(req,res))
 
-router.put('/:id', (req, res)=> GetMosque(req, res))
+router.put('/:id', (req, res) => GetMosque(req, res))
+router.get('/:name', (req, res) => SearchForMosque(req, res))
 
 
 module.exports = {
