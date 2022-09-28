@@ -1,22 +1,7 @@
 const { Mosque } = require('../../../models/Mosque');
 const { makeid } = require('../../../../helpers/randomid');
-const {MosqueAccount} = require('../../../models/MosqueAccount');
 const { PrayerTime } = require('../../../models/PrayerTime');
 
-async function checkIfEmailExists(email){
-    const exists = await MosqueAccount.count({
-        where: {
-            email: email
-        }
-    })
-    .then(res => {
-        if(res > 0)
-            return true
-        else
-            return false
-    })
-    return exists
-}
 
 async function setPrayerObject(prayer, mosque_id){
     const { id, time } = prayer;
