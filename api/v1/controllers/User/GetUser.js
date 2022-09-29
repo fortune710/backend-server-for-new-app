@@ -92,7 +92,7 @@ const GetUser = async (req, res) => {
 
     } 
     else if(!login) {
-        const userMosques = await checkMosquesUserIsFollowing(data?.id)
+        const userMosques = await checkMosquesUserIsFollowing(id)
 
         if(id){
             await User.findByPk(id, { 
@@ -103,7 +103,7 @@ const GetUser = async (req, res) => {
             .catch((err) => res.json({ response:'Error while getting user!', code:err }))
         } 
         else {
-            return res.staus(400).json({ response:'Data missing!' })
+            return res.status(400).json({ response:'Data missing!' })
         } 
 
     } 
