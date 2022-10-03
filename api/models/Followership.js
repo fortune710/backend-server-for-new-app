@@ -17,8 +17,6 @@ Followership.init({
         type: DataTypes.STRING(10), 
         allowNull: true
     },
-
-
 },{
     sequelize,
     tableName: 'followership',

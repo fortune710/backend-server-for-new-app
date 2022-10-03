@@ -22,6 +22,11 @@ User.init({
     type:{ //Admin, Custodian, or regular user
         type: DataTypes.SMALLINT,
     },
+    is_activated: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
+    },
     sign_in_method: {
         type: DataTypes.ENUM('email', 'google')
     },

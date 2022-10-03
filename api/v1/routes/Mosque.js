@@ -13,6 +13,7 @@ const { MosqueLogin } = require('../controllers/Mosque/MosqueLogin');
 const { SearchForMosque } = require('../controllers/Mosque/SearchForMosque');
 
 const cors = require('cors');
+const {GetForums} = require('../controllers/Mosque/GetForums')
 
 router.use(cors())
 const corsOpts = {
@@ -54,7 +55,7 @@ router.post('/delete', (req,res) => DeleteMosque(req,res))
 
 router.put('/:id', (req, res) => GetMosque(req, res))
 router.get('/:name', (req, res) => SearchForMosque(req, res))
-
+router.get('/get-forums/:user_id', (req, res) => GetForums(req, res))
 
 module.exports = {
     MosqueRouter: router

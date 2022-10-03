@@ -1,11 +1,12 @@
 const express = require('express');
-const { body } = require('express-validator');
+const { body, param } = require('express-validator');
 const AuthRouter = express.Router();
 
 const { AddUser } = require('../controllers/User/AddUser');
 const { GetUser } = require('../controllers/User/GetUser');
 const { UpdateUser } = require('../controllers/User/UpdateUser');
 const {ChangePassword} = require('../controllers/User/ChangePassword');
+const { ActivateAccount } = require('../controllers/User/ActivateAccount');
 
 AuthRouter.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -29,6 +30,10 @@ AuthRouter.put('/update-profile', [
 AuthRouter.put('/change-password', [
     body('user_id').trim()
 ], (req, res) => ChangePassword(req, res))
+
+AuthRouter.get('/activate/:user_id',[
+    param('user_id').trim()
+] ,(req, res) => ActivateAccount(req, res))
 
 module.exports = {
     AuthRouter: AuthRouter
