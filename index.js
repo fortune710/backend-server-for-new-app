@@ -38,7 +38,7 @@ app.post('/state-timings', (req, res) => {
         params: {
             city: city,
             country: country,
-            method: 8
+            method: 3
         }
     })
     .then((response) => {
@@ -68,6 +68,13 @@ app.post('/state-timings', (req, res) => {
                 isha: Isha
             },
             next_prayer: closestTime
+        }
+
+        if(!closestTime){
+            apiResponse.next_prayer = {
+                name: "Fajr",
+                time: Fajr
+            }
         }
 
         return res.json({ response: apiResponse })
