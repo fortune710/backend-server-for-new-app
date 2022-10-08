@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
 
 app.use(bodyparser)
 
-app.get('/', (req, res) => res.send("working!"))
+app.get('/', (req, res) => res.send("working"))
 
 app.post('/state-timings', (req, res) => {
     const { country, city, state } = req.body;
