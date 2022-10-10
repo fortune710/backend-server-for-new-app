@@ -17,7 +17,7 @@ const { convertISOToTime } = require('./helpers/isototime')
 const app = express();
 
 app.use(cors({
-    origin: ["https://fortune710.github.io","http://localhost:3000", "io.iqama", "*"],
+    origin: ["https://fortune710.github.io","http://localhost:3000", "io.iqama", "capacitor://localhost" ,"*"],
     credentials: true
 }))
 
