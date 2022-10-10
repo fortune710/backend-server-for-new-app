@@ -7,13 +7,14 @@ const { GetUpcomingBooks } = require('../controllers/Books/GetBooks');
 const cors = require('cors');
 
 router.use(cors())
-
+/*
 router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
 });
+*/
 
 router.post('/add', (req, res) => AddBook(req, res))
 router.put('/update-time', (req, res) => UpdateTime(req,res))
