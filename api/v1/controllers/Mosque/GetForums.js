@@ -22,6 +22,9 @@ const GetForumInfo = async(mosque_id) => {
 const GetForums = async (req, res) => {
     const { user_id } = req.params;
 
+    if(!user_id){
+        return res.json({ forums: [] })
+    }
     await Followership.findAll({
         where: {
             user_id: user_id

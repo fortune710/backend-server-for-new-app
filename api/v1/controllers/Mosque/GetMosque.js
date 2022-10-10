@@ -23,7 +23,9 @@ const getAdmins = async(mosque_id) => {
 }
 
 const checkIfUserIsFollowing = async(user_id, mosque_id) => { // Should return false if user is not following
-
+    if(!user_id){
+        return false
+    }
     const isFollowing = await Followership.findOne({
         where: {
             [Op.and]: [
