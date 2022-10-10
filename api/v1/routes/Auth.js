@@ -8,13 +8,14 @@ const { UpdateUser } = require('../controllers/User/UpdateUser');
 const {ChangePassword} = require('../controllers/User/ChangePassword');
 const { ActivateAccount } = require('../controllers/User/ActivateAccount');
 
+/*
 AuthRouter.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,POST,PUT");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Origin");
     next();
 });
-
+*/
 AuthRouter.post('/sign-in',[
     body('email').isEmail(),
 ], (req, res) => GetUser(req, res))
