@@ -15,16 +15,6 @@ const { SearchForMosque } = require('../controllers/Mosque/SearchForMosque');
 const cors = require('cors');
 const {GetForums} = require('../controllers/Mosque/GetForums')
 
-router.use(cors())
-const corsOpts = {
-    origin: '*',
-    methods: [],
-    allowedHeaders: [],
-    exposedHeaders: [],
-    credentials: true
-}
-
-router.all('/create', cors(corsOpts))
 
 /*
 router.use(function(req, res, next) {
@@ -36,9 +26,6 @@ router.use(function(req, res, next) {
 */
 
 router.post('/create', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     AddMosque(req, res)
 })
 

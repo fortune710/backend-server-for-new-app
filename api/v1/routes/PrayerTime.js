@@ -15,7 +15,7 @@ const corsOpts = {
     credentials: true
 }
 
-router.all('/add', cors(corsOpts))
+//router.all('/add', cors(corsOpts))
 
 /*
 router.use(function(req, res, next) {
