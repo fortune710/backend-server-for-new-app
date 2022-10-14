@@ -43,7 +43,7 @@ const AddUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10)
     
-    if(!name || !email || !password){
+    if(!name || !email){
         return res.json({ response:'Data missing!' })
     } 
     
