@@ -7,7 +7,7 @@ const { GetUser } = require('../controllers/User/GetUser');
 const { UpdateUser } = require('../controllers/User/UpdateUser');
 const {ChangePassword} = require('../controllers/User/ChangePassword');
 const { ActivateAccount } = require('../controllers/User/ActivateAccount');
-
+const { SendEmail } = require('../controllers/User/SendEmail');
 /*
 AuthRouter.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -35,6 +35,10 @@ AuthRouter.put('/change-password', [
 AuthRouter.get('/activate/:user_id',[
     param('user_id').trim()
 ] ,(req, res) => ActivateAccount(req, res))
+
+AuthRouter.post('/email', [
+    body('email').isEmail()
+], (req, res) => SendEmail(req, res))
 
 module.exports = {
     AuthRouter: AuthRouter
