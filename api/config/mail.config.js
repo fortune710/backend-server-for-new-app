@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 async function mailConfig(){
-    const testAccount = await nodemailer.createTestAccount().then(res => { return res })
+    const testAccount = await nodemailer.createTestAccount()
     const transporter = nodemailer.createTransport({
         host: "smtp.ethereal.email",
         port: 587,
@@ -14,7 +14,7 @@ async function mailConfig(){
     return transporter
 }
 
-const testAccount = await nodemailer.createTestAccount().then(res => { return res })
+const testAccount = await nodemailer.createTestAccount()
 const transporter = nodemailer.createTransport({
     host: "smtp.ethereal.email",
     port: 587,
