@@ -41,7 +41,6 @@ const AddUser = async (req, res) => {
     const { id, email, password, name, type, auth_method, profile_pic } = req.body;
     const accountExists = await checkForExistingAccount(req.body).then(number => { return number })
 
-    const hashedPassword = await bcrypt.hash(password, 10)
     
     if(!name || !email){
         return res.json({ response:'Data missing!' })
@@ -52,6 +51,8 @@ const AddUser = async (req, res) => {
     }
     
     if(auth_method === 'email'){
+        const hashedPassword = await bcrypt.hash(password, 10)
+
         return await User.create({
             id: makeid(15),
             name: name,
@@ -76,7 +77,8 @@ const AddUser = async (req, res) => {
             name: name,
             sign_in_method: auth_method,
             profile_pic: profile_pic,
-            type: type
+            type: type,
+            is_activated: true
         })
         .then(data => {
             return res.json({ user_data: data, message:'Account successfully created with Google' })

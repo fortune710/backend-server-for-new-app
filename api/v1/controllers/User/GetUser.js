@@ -37,7 +37,7 @@ const checkMosquesUserIsFollowing = async (user_id) => {
 }
 
 const GetUser = async (req, res) => {
-    const { id, email, password, login, sign_in_method }  = req.body;
+    const { id, email, password, login, sign_in_method, attributes }  = req.body;
 
     if(email && password && login){
         if(!checkIfAccountDoesNotExist(email)){
@@ -92,13 +92,16 @@ const GetUser = async (req, res) => {
 
     } 
     else if(!login) {
+        //This gets the ID's of the mosque the user is following
         const userMosques = await checkMosquesUserIsFollowing(id)
 
+
+        //Must add the attributes array to query
         if(id){
             await User.findByPk(id, { 
-                attributes: { exclude: ['email', 'password'] }
+                attributes: [...attributes]
             }).then(data => {
-                return res.json({ user_data: {...data.dataValues, mosques_follow: userMosques} })
+                return res.json({ user_data: {...data.dataValues } })
             })
             .catch((err) => res.json({ response:'Error while getting user!', code:err }))
         } 
