@@ -1,8 +1,9 @@
-const { transporterForEmail } = require('../../../config/mail.config');
+const { mailConfig } = require('../../../config/mail.config');
 
 const SendEmail = async (req, res) => {
     const { user_id, email } = req.body;
-
+    const transporterForEmail = await mailConfig()
+    
     transporterForEmail.sendMail({
         subject: "Activate your Iqama Account",
         from: "noreply@iqama.app",
