@@ -20,8 +20,8 @@ const SendEmail = async (req, res) => {
     .then(() => {
         return res.json({ message: "Email sent sucessfully!" })
     })
-    .catch(() => {
-        return res.status(400).json({ message: "Error while sending email!" })
+    .catch((err) => {
+        return res.status(400).json({ code: err,  message: "Error while sending email!" })
     })
 
 }
