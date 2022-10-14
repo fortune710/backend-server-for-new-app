@@ -2,12 +2,10 @@ const nodemailer = require('nodemailer');
 
 const testAccount = nodemailer.createTestAccount()
 const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false,
+    service: 'Gmail',
     auth: {
-        user: testAccount.user,
-        pass: testAccount.pass
+        user: 'gmail.user@gmail.com',
+        pass: 'userpass'
     }
 })
 
