@@ -45,6 +45,7 @@ if(process.env.NODE_ENV === 'dev'){
         port: databaseConfig.port,
         dialectModule: require('mysql2')
     })
+    //added comment
 }
 
 
