@@ -35,12 +35,15 @@ if(process.env.NODE_ENV === 'dev'){
     sequelize = new Sequelize('backend-server', 'root', '', {
         dialect: 'mysql',
         host: 'localhost',
+        dialectModule: require('mysql2')
+
     })
 } else {
     sequelize = new Sequelize(databaseConfig.databaseName, databaseConfig.username, databaseConfig.password, {
         host: databaseConfig.host,
         dialect: 'mysql',
-        port: databaseConfig.port
+        port: databaseConfig.port,
+        dialectModule: require('mysql2')
     })
 }
 
