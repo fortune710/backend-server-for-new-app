@@ -104,13 +104,13 @@ app.get('/get-hijri-date', (req, res) => {
 })
 
 
-app.use('/auth', AuthRouter)
+//app.use('/auth', AuthRouter)
 app.use('/following', FollowRouter)
 app.use('/mosque', MosqueRouter)
 app.use('/admin', AdminRouter)
 app.use('/post', PostRouter)
-app.use('/prayer-time', PrayerTimeRouter)
-app.use('/mosque-books', MosqueBookRouter)
+//app.use('/prayer-time', PrayerTimeRouter)
+//app.use('/mosque-books', MosqueBookRouter)
 
 const PORT = 4000;
 
